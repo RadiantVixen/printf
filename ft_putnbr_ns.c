@@ -6,27 +6,23 @@
 /*   By: aatki <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 18:09:44 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/30 18:10:31 by aatki            ###   ########.fr       */
+/*   Updated: 2022/11/01 22:59:03 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 
-#include "printf.h"
-
-void	ft_putnbr_ns(int n)
+int	ft_putnbr_ns(unsigned int n)
 {
-	if (n == -2147483648)
-	{
-		ft_putstr("-2147483648");
-		return ;
-	}
+	int	cmpt;
+
+	cmpt = 0;
 	if (n >= 0 && n <= 9)
-	{
-		ft_putchar (n + '0');
-	}
+		cmpt += ft_putchar (n + '0');
 	else
 	{
-		ft_putnbr_ns(n / 10);
-		ft_putnbr_ns(n % 10);
+		cmpt += ft_putnbr_ns(n / 10);
+		cmpt += ft_putnbr_ns(n % 10);
 	}
+	return (cmpt);
 }

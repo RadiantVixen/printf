@@ -6,15 +6,15 @@
 #    By: aatki <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/30 13:25:51 by aatki             #+#    #+#              #
-#    Updated: 2022/10/30 18:28:31 by aatki            ###   ########.fr        #
+#    Updated: 2022/11/01 16:57:59 by aatki            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = printf.a
+NAME = libftprintf.a
 
-SRC = ft_printf.c ft_putchr.c ft_putstr.c ft_putnbr.c ft_putnbr_ns.c ft_put_binaire.c ft_put_hexadicimall.c ft_put_hexadicimal.c ft_put_address.c
+SRC = ft_printf.c ft_putchr.c ft_putstr.c ft_putnbr.c ft_putnbr_ns.c ft_put_hexadicimall.c ft_put_hexadicimal.c ft_put_address.c 
 
-CC = cc 
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 

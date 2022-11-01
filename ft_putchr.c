@@ -6,13 +6,14 @@
 /*   By: aatki <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 18:02:11 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/30 18:03:26 by aatki            ###   ########.fr       */
+/*   Updated: 2022/11/01 22:37:42 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-void	ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	write (1, &c, 1);
+	return (1);
 }

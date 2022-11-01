@@ -6,32 +6,29 @@
 /*   By: aatki <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 18:00:15 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/30 18:09:32 by aatki            ###   ########.fr       */
+/*   Updated: 2022/11/01 22:56:31 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-void	ft_putnbr(int n)
+int	ft_putnbr(long n)
 {
-	if (n == -2147483648)
-	{
-		ft_putstr("-2147483648");
-		return ;
-	}
-	if (n >= 0 && n <= 9)
-	{
-		ft_putchar (n + '0');
-	}
-	else if (n < 0)
+	int	cmpt;
+
+	cmpt = 0;
+	if (n < 0)
 	{
 		ft_putchar('-');
 		n = n * (-1);
-		ft_putnbr(n);
+		cmpt++;
+	}
+	if (n > 9)
+	{
+		cmpt += ft_putnbr(n / 10);
+		cmpt += ft_putnbr(n % 10);
 	}
 	else
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
+		cmpt += ft_putchar (n + '0');
+	return (cmpt);
 }

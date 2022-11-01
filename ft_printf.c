@@ -6,136 +6,59 @@
 /*   By: aatki <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 13:24:04 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/30 18:56:46 by aatki            ###   ########.fr       */
+/*   Updated: 2022/11/01 22:51:33 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-/*int ft_printf(const char *fmt, ...)
+int	ft_swich(const char *fmt, int i, va_list	ap)
 {
-	va_list	ap;
-	//va_list	ap2;
-	char	c;
-	char	*s;
-	int	d;
-	void *p;
-	va_start(ap,fmt);
-	//va_copy(ap2,ap);
-	while (*fmt)
-	{
-		switch(*fmt++)
-		{
-			case 's' :
-						s = va_arg(ap, char *);
-					 ft_putstr(s);
-					 break;
-			case 'c' :
-					 c = va_arg(ap, int);
-					 ft_putchar(c);
-					 break;
-			case 'd' :
-					d = va_arg(ap, int);
-					ft_putnbr(d);
-					break;
-			case '%':
-					 //c = va_arg(ap, int);
-					 ft_putchar('%');
-					 break;
-			case 'p':
-					p = va_arg(ap, char *);
-					ft_put_address(p);
-					break;
-			case 'u':
-					d = va_arg(ap, int);
-					ft_putnbr_ns(d);
-					break;
-			case 'i':
-					d = va_arg(ap, int);
-					ft_put_binaire(d);
-					break;
-			case 'x':
-				d = va_arg(ap, int);
-					ft_put_hexadicimal(d);
-					break;
-			case 'X':
-					d = va_arg(ap, int);
-					//ft_put_hexadicimall(d);
-					break;
-		}
-	}
-	va_end(ap);
-	//va_end(ap2);
-	return 1;
+	int	cmpt;
+
+	cmpt = 0;
+	if (fmt[i] == 'u')
+		cmpt += ft_putnbr_ns(va_arg(ap, int));
+	if (fmt[i] == 'c')
+		cmpt += ft_putchar(va_arg(ap, int));
+	if (fmt[i] == 'd' || fmt[i] == 'i')
+		cmpt += ft_putnbr(va_arg(ap, int));
+	if (fmt[i] == 'p')
+		cmpt += ft_put_address(va_arg(ap, unsigned long *));
+	if (fmt[i] == 's')
+		cmpt += ft_putstr(va_arg(ap, char *));
+	if (fmt[i] == 'x')
+		cmpt += ft_put_hexadicimal(va_arg(ap, int));
+	if (fmt[i] == 'X')
+		cmpt += ft_put_hexadicimall(va_arg(ap, int));
+	if (fmt[i] == '%')
+		cmpt += ft_putchar('%');
+	return (cmpt);
 }
 
-int main()
+int	ft_printf(const char *fmt, ...)
 {
-	ft_printf("%i",10);
-	 printf("\n%u",33222);
-}*/
+	int		i;
+	va_list	ap;
+	int		cmpt;
 
-int printf(char *s, ...)
-{
-	int i = 0;
-	va_list	*p;
-	int cmpt;
-	//va_list	ap2;
-	char	c;
-	char	*s;
-	int	d;
-	void *p;
-	va_start(ap,fmt);
-	//va_copy(ap2,ap);
-	while(s[i])
+	i = 0;
+	cmpt = 0;
+	va_start (ap, fmt);
+	while (fmt[i])
 	{
-		if(s[i] == '%')
+		if (fmt[i] == '%')
 		{
 			i++;
-			if(s[i] == 's')
-			{
-				s = va_arg(ap, char *);
-				 cmpt=ft_putstr(s);
-			}
-			if(s[i] == 'c')
-			{
-				 c = va_arg(ap, int);
-					 ft_putchar(c);
-			}
-			if(s[i] == 'd')
-			{
-				d = va_arg(ap, int);
-				ft_putnbr(d);
-			}
-			if(s[i] == '%')
-			{
-				ft_putchar('%');
-			}
-			if(s[i] == 'p')
-			{
-				p = va_arg(ap, char *);
-				ft_put_address(p);
-			}
-			if(s[i] == 'u')
-			{
-				d = va_arg(ap, int);
-				ft_putnbr_ns(d);
-			}
-			if(s[i] == 'i')
-			{
-				d = va_arg(ap, int);
-					ft_put_binaire(d);
-			}
-			if(s[i] == 'x')
-			{
-				d = va_arg(ap, int);
-					ft_put_hexadicimal(d);
-			}
-			if(s[i] == '%')
-			{
-				d = va_arg(ap, int);
-				//ft_put_hexadicimall(d);
-			}
+			if (fmt[i] == '%' || fmt[i] == 'u' || fmt[i] == 'c' || \
+				fmt[i] == 'd' || fmt[i] == 'i' || fmt[i] == 'p' || \
+				fmt[i] == 's' || fmt[i] == 'x' || fmt[i] == 'X')
+				cmpt += ft_swich(fmt, i, ap);
 		}
+		else
+			cmpt += ft_putchar(fmt[i]);
+		i++;
 	}
+	va_end(ap);
+	return (cmpt);
 }

@@ -6,23 +6,26 @@
 /*   By: aatki <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 18:10:41 by aatki             #+#    #+#             */
-/*   Updated: 2022/10/30 18:12:12 by aatki            ###   ########.fr       */
+/*   Updated: 2022/11/01 22:55:07 by aatki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"printf.h"
+#include"ft_printf.h"
 
-
-void	ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
 	int	i;
 
 	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
+	if (s)
 	{
-		ft_putchar(s[i]);
-		i++;
+		while (s[i])
+		{
+			ft_putchar(s[i]);
+			i++;
+		}
+		return (i);
 	}
+	else
+		return (ft_putstr("(null)"));
 }
